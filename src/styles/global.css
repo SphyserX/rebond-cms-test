@@ -386,3 +386,7 @@ a:hover {
     transition: none !important;
   }
 }
+
+main > .conteneur > .liste-articles {
+  margin-bottom: 4rem;
+}
