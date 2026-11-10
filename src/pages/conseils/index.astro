@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import { articlesPublies } from '../../lib/articles';
+import { url, dateLongue, dateIso } from '../../lib/site';
+
+const articles = await articlesPublies();
+---
+
+<Base titre="Conseils | Coach démo" description="Les conseils de Coach démo, du plus récent au plus ancien.">
+  <div class="conteneur">
+    <div class="page-titre">
+      <h1>Conseils</h1>
+      <p>Des articles courts, du plus récent au plus ancien.</p>
+    </div>
+    {
+      articles.length === 0 ? (
+        <p class="vide">Aucun conseil publié pour le moment.</p>
+      ) : (
+        <ul class="liste-articles">
+          {articles.map((article) => (
+            <li>
+              <time datetime={dateIso(article.data.date)}>{dateLongue(article.data.date)}</time>
+              <div>
+                <h2>
+                  <a href={url(`/conseils/${article.id}/`)}>{article.data.title}</a>
+                </h2>
+                <p>{article.data.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</Base>

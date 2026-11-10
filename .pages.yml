@@ -1,0 +1,85 @@
+# Configuration de Pages CMS (https://pagescms.org/docs/configuration/).
+# Les champs doivent rester identiques à src/content.config.ts.
+
+media:
+  input: public/images
+  # Chemin écrit dans le contenu : il inclut la base du site (/rebond-cms-test).
+  output: /rebond-cms-test/images
+  categories: [image]
+  rename: safe
+
+content:
+  - name: accueil
+    label: Page d'accueil
+    type: file
+    path: src/content/pages/accueil.md
+    format: yaml-frontmatter
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: accroche
+        label: Accroche
+        type: text
+        required: true
+      - name: image
+        label: Photo
+        type: image
+      - name: image_alt
+        label: Description de la photo
+        description: Phrase courte lue par les lecteurs d'écran.
+        type: string
+      - name: bouton_texte
+        label: Texte du bouton
+        type: string
+        required: true
+      - name: bouton_lien
+        label: Lien du bouton
+        description: "Adresse complète, par exemple mailto:contact@example.com"
+        type: string
+        required: true
+      - name: body
+        label: Texte
+        type: rich-text
+
+  - name: articles
+    label: Conseils
+    type: collection
+    path: src/content/articles
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    view:
+      fields: [title, date, draft]
+      primary: title
+      sort: [date, title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Titre
+        type: string
+        required: true
+      - name: description
+        label: Description
+        description: Une ou deux phrases affichées dans la liste des conseils.
+        type: text
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: image
+        label: Image
+        type: image
+      - name: draft
+        label: Brouillon
+        description: Un brouillon n'apparaît pas sur le site.
+        type: boolean
+        default: false
+      - name: body
+        label: Texte
+        type: rich-text

@@ -1,0 +1,56 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { articlesPublies } from '../lib/articles';
+import { url, dateLongue, dateIso } from '../lib/site';
+
+const accueil = await getEntry('pages', 'accueil');
+if (!accueil) throw new Error('src/content/pages/accueil.md est introuvable');
+const { Content } = await render(accueil);
+const { title, accroche, image, image_alt, bouton_texte, bouton_lien } = accueil.data;
+const derniers = (await articlesPublies()).slice(0, 2);
+---
+
+<Base titre={`${title} | Coach démo`} description={accroche}>
+  <div class="conteneur presentation">
+    <div>
+      <h1>{title}</h1>
+      <p class="accroche">{accroche}</p>
+      <div class="texte-presentation prose">
+        <Content />
+      </div>
+      <a class="bouton" href={bouton_lien}>{bouton_texte}</a>
+    </div>
+    {
+      image && (
+        <figure class="photo">
+          <img src={image} alt={image_alt ?? ''} width="800" height="800" />
+        </figure>
+      )
+    }
+  </div>
+
+  {
+    derniers.length > 0 && (
+      <section class="derniers" aria-labelledby="derniers-titre">
+        <div class="conteneur">
+          <h2 id="derniers-titre">Derniers conseils</h2>
+          <ul class="liste-articles">
+            {derniers.map((article) => (
+              <li>
+                <time datetime={dateIso(article.data.date)}>{dateLongue(article.data.date)}</time>
+                <div>
+                  <h3>
+                    <a href={url(`/conseils/${article.id}/`)}>{article.data.title}</a>
+                  </h3>
+                  <p>{article.data.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <a class="suite" href={url('/conseils/')}>Tous les conseils</a>
+        </div>
+      </section>
+    )
+  }
+</Base>

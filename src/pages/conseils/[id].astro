@@ -1,0 +1,28 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { articlesPublies } from '../../lib/articles';
+import { url, dateLongue, dateIso } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const articles = await articlesPublies();
+  return articles.map((article) => ({ params: { id: article.id }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const { title, description, date, image } = article.data;
+---
+
+<Base titre={`${title} | Coach démo`} description={description}>
+  <article class="conteneur article">
+    <time class="article-date" datetime={dateIso(date)}>{dateLongue(date)}</time>
+    <h1>{title}</h1>
+    <p class="article-chapo">{description}</p>
+    {image && <img class="article-image" src={image} alt="" />}
+    <div class="prose">
+      <Content />
+    </div>
+    <a class="retour" href={url('/conseils/')}>Tous les conseils</a>
+  </article>
+</Base>

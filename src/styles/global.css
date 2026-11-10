@@ -1,0 +1,388 @@
+:root {
+  --fond: #fffbf6;
+  --fond-doux: #fbefe3;
+  --texte: #2a211c;
+  --texte-doux: #5c4d44;
+  --orange: #ee7228;
+  --rose: #ea5a84;
+  --titres: 'Fredoka', 'Nunito', system-ui, sans-serif;
+  --courant: 'Nunito', system-ui, sans-serif;
+  --largeur: 68rem;
+  --marge: 1.25rem;
+  --rayon: 1.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: var(--courant);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--titres);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 1.5rem + 3.6vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 1.25rem + 1.2vw, 2rem);
+}
+
+p {
+  margin: 0 0 1em;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--rose);
+  text-decoration-thickness: 0.14em;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  text-decoration-color: var(--texte);
+}
+
+:focus-visible {
+  outline: 3px solid var(--texte);
+  outline-offset: 3px;
+  border-radius: 0.25rem;
+}
+
+.conteneur {
+  width: min(100% - 2 * var(--marge), var(--largeur));
+  margin-inline: auto;
+}
+
+.evitement {
+  position: absolute;
+  left: var(--marge);
+  top: -4rem;
+  padding: 0.75rem 1rem;
+  background: var(--texte);
+  color: var(--fond);
+  border-radius: 0.5rem;
+  z-index: 10;
+}
+
+.evitement:focus {
+  top: var(--marge);
+}
+
+/* En-tête */
+
+.entete {
+  padding-block: 1rem;
+}
+
+.entete .conteneur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.marque {
+  font-family: var(--titres);
+  font-weight: 600;
+  font-size: 1.5rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+}
+
+.marque::before {
+  content: '';
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+.menu ul {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: 0.9rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  background: var(--fond-doux);
+}
+
+.menu a[aria-current='page'] {
+  background: var(--texte);
+  color: var(--fond);
+}
+
+/* Accueil */
+
+.presentation {
+  display: grid;
+  gap: 2.5rem;
+  padding-block: 2rem 4rem;
+}
+
+.accroche {
+  font-size: clamp(1.15rem, 1rem + 0.6vw, 1.4rem);
+  line-height: 1.5;
+  margin-block: 1.25rem 1.5rem;
+  max-width: 34rem;
+}
+
+.texte-presentation {
+  max-width: 34rem;
+  color: var(--texte-doux);
+}
+
+.bouton {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3.25rem;
+  padding: 0.5rem 1.75rem;
+  margin-top: 0.75rem;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--texte);
+  font-family: var(--titres);
+  font-weight: 600;
+  font-size: 1.15rem;
+  text-decoration: none;
+  transition: background-color 160ms ease-out, color 160ms ease-out;
+}
+
+.bouton:hover {
+  background: var(--texte);
+  color: var(--fond);
+}
+
+.photo {
+  position: relative;
+  margin: 0;
+  max-width: 26rem;
+  justify-self: center;
+  width: 100%;
+}
+
+.photo::before {
+  content: '';
+  position: absolute;
+  inset: auto -1rem -1rem auto;
+  width: 60%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--rose);
+}
+
+.photo img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--rayon);
+}
+
+.derniers {
+  background: var(--fond-doux);
+  padding-block: 3rem 3.5rem;
+}
+
+.derniers .suite {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-weight: 700;
+}
+
+/* Liste des conseils */
+
+.page-titre {
+  padding-block: 2rem 1rem;
+}
+
+.page-titre p {
+  margin-top: 1rem;
+  max-width: 36rem;
+  color: var(--texte-doux);
+}
+
+.liste-articles {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.liste-articles li {
+  padding-block: 1.5rem;
+  border-top: 2px solid var(--texte);
+}
+
+.liste-articles time,
+.article-date {
+  display: block;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--texte-doux);
+}
+
+.liste-articles h2,
+.liste-articles h3 {
+  font-size: 1.5rem;
+  margin-block: 0.25rem 0.5rem;
+}
+
+.liste-articles h2 a,
+.liste-articles h3 a {
+  text-decoration: none;
+}
+
+.liste-articles h2 a:hover,
+.liste-articles h3 a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+}
+
+.liste-articles p {
+  margin: 0;
+  max-width: 38rem;
+}
+
+.vide {
+  padding-block: 1.5rem;
+}
+
+/* Article */
+
+.article {
+  max-width: 42rem;
+  padding-block: 2rem 4rem;
+}
+
+.article h1 {
+  font-size: clamp(2rem, 1.5rem + 2.4vw, 3rem);
+  margin-block: 0.5rem 1rem;
+}
+
+.article-chapo {
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.article-image {
+  width: 100%;
+  border-radius: var(--rayon);
+  margin-block: 1.5rem;
+}
+
+.prose h2 {
+  margin-block: 2rem 0.75rem;
+}
+
+.prose h3 {
+  font-size: 1.3rem;
+  margin-block: 1.5rem 0.5rem;
+}
+
+.prose img {
+  border-radius: 1rem;
+  margin-block: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.35em;
+}
+
+.prose li::marker {
+  color: var(--texte);
+  font-weight: 700;
+}
+
+.retour {
+  display: inline-block;
+  margin-top: 2rem;
+  font-weight: 700;
+}
+
+/* Pied de page */
+
+.pied {
+  border-top: 2px solid var(--texte);
+  padding-block: 1.5rem 2.5rem;
+  font-size: 0.95rem;
+  color: var(--texte-doux);
+}
+
+.pied p {
+  margin: 0;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --marge: 2rem;
+  }
+
+  .presentation {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 4rem;
+    padding-block: 3.5rem 6rem;
+  }
+
+  .liste-articles li {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    gap: 2rem;
+  }
+
+  .liste-articles time {
+    padding-top: 0.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
